@@ -1,4 +1,4 @@
-package com.lspro.factory;
+package com.hibernate.factory;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

@@ -5,11 +5,17 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lspro.dao.impl.IFarmDAO;
+import com.lspro.dao.inter.IFarmDAO;
 import com.lspro.factory.DaoFactory;
 import com.lspro.pojo.FarmMes;
 import com.lspro.pojo.TechnicalPerson;
@@ -28,53 +34,56 @@ public class TestFramClass {
 
 	@Test
 	public void testFarmInsert() {
-		FarmMes mes = new FarmMes();
-		mes.setFarmId("2222222222222222");
-		mes.setFarmName("demotest1");
-		List<String> list = new ArrayList<String>();
-		list.add("A");
-		list.add("B");
-		mes.setSpecies(list);
-		mes.setFarmSize(300);
-		mes.setLocation("zhongkai");
-		mes.setLeader("weimingming");
-		mes.setZipcode("500000");
-		mes.setPhoneNum("123123123");
-		List<TechnicalPerson> person = new ArrayList<TechnicalPerson>();
-		TechnicalPerson p1 = new TechnicalPerson();
-		p1.setWorkId("123");
-		p1.setFarrierNum("asdfghj");
-		p1.setProfessSkill("moumou");
-		p1.setPhoneNum("987654");
-		TechnicalPerson p2 = new TechnicalPerson();
-		p2.setWorkId("456");
-		p2.setFarrierNum("xzczxczxcz");
-		p2.setProfessSkill("mou");
-		p2.setPhoneNum("456789");
-		person.add(p1);
-		person.add(p2);
-		mes.setPerson(person);
-		mes.setCertificate("AA123456");
-		List<String> envirEquip = new ArrayList<String>();
-		envirEquip.add("AAA");
-		envirEquip.add("BBB");
-		mes.setEnvirEquip(envirEquip);
-		mes.setFarmPhoto("photo.jpg");
-		mes.setImmunePro("llllllllllllllaaaaaaaaaa");
-		mes.setAccept(false);
-		try {
-			dao.doCreate(mes);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i = 0;i<15;i++){
+			FarmMes mes = new FarmMes();
+			mes.setFarmId("2222222222222222"+i);
+			mes.setFarmName("demotest1");
+			List<String> list = new ArrayList<String>();
+			list.add("A");
+			list.add("B");
+			mes.setSpecies(list);
+			mes.setFarmSize(300);
+			mes.setLocation("zhongkai");
+			mes.setLeader("weimingming");
+			mes.setZipcode("500000");
+			mes.setPhoneNum("123123123");
+			List<TechnicalPerson> person = new ArrayList<TechnicalPerson>();
+			TechnicalPerson p1 = new TechnicalPerson();
+			p1.setWorkId("123");
+			p1.setFarrierNum("asdfghj");
+			p1.setProfessSkill("moumou");
+			p1.setPhoneNum("987654");
+			TechnicalPerson p2 = new TechnicalPerson();
+			p2.setWorkId("456");
+			p2.setFarrierNum("xzczxczxcz");
+			p2.setProfessSkill("mou");
+			p2.setPhoneNum("456789");
+			person.add(p1);
+			person.add(p2);
+			mes.setPerson(person);
+			mes.setCertificate("AA123456");
+			List<String> envirEquip = new ArrayList<String>();
+			envirEquip.add("AAA");
+			envirEquip.add("BBB");
+			mes.setEnvirEquip(envirEquip);
+			mes.setFarmPhoto("photo.jpg");
+			mes.setImmunePro("llllllllllllllaaaaaaaaaa");
+			mes.setAccept(false);
+			try {
+				dao.doCreate(mes);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	
 	}
 	
 	@Test
 	public void testUpdate(){
 		FarmMes mes = new FarmMes();
 		mes.setFarmId("111111111111111");
-		mes.setFarmName("qw71ss1 111erty");
+		mes.setFarmName("ÄãºÃ");
 		List<String> list = new ArrayList<String>();
 		list.add("A");
 		list.add("B");

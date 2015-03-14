@@ -1,7 +1,5 @@
 package com.lspro.pojo;
 
-import javax.persistence.Embeddable;
-
 /**
  * Desperation:
  * 技术人员基本信息,包括工作id,专业方向等<br>
@@ -12,6 +10,10 @@ import javax.persistence.Embeddable;
  * @see FarmMes
  * @version 1.0
  */
+
+
+import javax.persistence.Embeddable;
+
 @Embeddable
 public class TechnicalPerson {
 	

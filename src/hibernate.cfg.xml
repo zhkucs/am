@@ -18,6 +18,13 @@
         <property name="hibernate.format_sql">true</property>
         
     	<mapping class="com.lspro.pojo.FarmMes"/>
+    	<mapping class="com.lspro.pojo.ProductionRecords"/>
+    	<mapping class="com.lspro.pojo.FoodDrugUseRecord"/>
+    	<mapping class="com.lspro.pojo.DisinfectionRecord"/>
+    	<mapping class="com.lspro.pojo.ImmuneRecord"/>
+    	<mapping class="com.lspro.pojo.EpidemicMonitoring"/>
+    	<mapping class="com.lspro.pojo.MedicalRecord"/>
+    	<mapping class="com.lspro.pojo.DisposalHarmless"/>
     </session-factory>
 
 </hibernate-configuration>
