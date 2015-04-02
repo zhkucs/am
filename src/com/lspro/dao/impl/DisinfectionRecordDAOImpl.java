@@ -2,11 +2,11 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IDisinfectionRecordDAO接口，用于生产记录数据表增删改查方法的实现<br>
+ * 此操作类实现了IDisinfectionRecordDAO接口，用于消毒记录数据表基本信息增删改查方法的实现<br>
  * @author 谢福成
  * @see IDisinfectionRecordDAO
  * @see DisinfectionRecord
- * @version 1.0
+ * @version 2.0(去掉方法中的try...catch块)
  */
 
 import java.util.List;
@@ -41,91 +41,57 @@ public class DisinfectionRecordDAOImpl implements IDisinfectionRecordDAO {
 	
 	public boolean doCreate(DisinfectionRecord vo) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			tx = sess.beginTransaction();
-			sess.persist(vo);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		tx = sess.beginTransaction();
+		sess.persist(vo);
+		tx.commit();
+		return true;
 	}
 
 	public boolean doUpdate(DisinfectionRecord vo) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			tx = sess.beginTransaction();
-			sess.merge(vo);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		tx = sess.beginTransaction();
+		sess.merge(vo);
+		tx.commit();
+		return true;
 	}
 
 	public boolean doDelete(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			tx = sess.beginTransaction();
-			sess.delete(sess.load(DisinfectionRecord.class, id));
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+
+		tx = sess.beginTransaction();
+		sess.delete(sess.load(DisinfectionRecord.class, id));
+		tx.commit();
+		return true;
 
 	}
 
 	public DisinfectionRecord findById(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			DisinfectionRecord dis =(DisinfectionRecord) sess.load(DisinfectionRecord.class, id);
-			return dis;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		DisinfectionRecord dis =(DisinfectionRecord) sess.load(DisinfectionRecord.class, id);
+		return dis;
 
 	}
 
 	public List<DisinfectionRecord> findAll(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			List<DisinfectionRecord> list = sess.createQuery(hql).setString("name", "%" + keyWord + "%").list();
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		List<DisinfectionRecord> list = sess.createQuery(hql).setString("name", "%" + keyWord + "%").list();
+		return list;
 	}
 
 	public List<DisinfectionRecord> findAll(String keyWord, int currentPage,
 			int lineSize) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			Query query = sess.createQuery(hql).setString("name", "%"+keyWord+"%");
-			query.setFirstResult((currentPage-1)*lineSize);
-			query.setMaxResults(lineSize);
-			List<DisinfectionRecord> list = query.list();
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		Query query = sess.createQuery(hql).setString("name", "%"+keyWord+"%");
+		query.setFirstResult((currentPage-1)*lineSize);
+		query.setMaxResults(lineSize);
+		List<DisinfectionRecord> list = query.list();
+		return list;
 
 	}
 
 	public Integer getAllrecord(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			return sess.createQuery(hql).setString("name", "%"+keyWord+"%").list().size();
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		return sess.createQuery(hql).setString("name", "%"+keyWord+"%").list().size();
  
 	}
 

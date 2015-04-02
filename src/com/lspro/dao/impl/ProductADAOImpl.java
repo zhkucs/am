@@ -2,13 +2,12 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IImmuneRecordDAO接口，用于免疫记录数据表增删改查方法的实现<br>
+ * 此操作类实现了IProductADAO接口，用于动物检疫合格证明表(产品A)增删改查方法的实现<br>
  * @author 谢福成
- * @see IImmuneRecordDAO
- * @see ImmuneRecord
+ * @see IProductADAO
+ * @see ProductA
  * @version 1.0
  */
-
 import java.util.List;
 
 import org.hibernate.Query;
@@ -18,26 +17,26 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import com.lspro.dao.inter.IProductADAO;
+import com.lspro.pojo.ProductA;
 
-import com.lspro.dao.inter.IImmuneRecordDAO;
-import com.lspro.pojo.ImmuneRecord;
-
-public class ImmuneRecordDAOImpl implements IImmuneRecordDAO {
+public class ProductADAOImpl implements IProductADAO {
 	
 	private Session sess;
 	private SessionFactory sf;
 	private Transaction tx;
-	private static String hql = "from ImmuneRecord as immune WHERE immune.immuneTime like :name or immune.roomNum like :name or " +
-			"immune.remainNum like :name  ";
+	private String hql = "from ProductA as pa where pa.id like :name or pa.shipperName like :name or pa.phoneNum like :name or pa.productName like :name " +
+			"or pa.number like :name or pa.addressName like :name or pa.destination like :name or pa.carrier like :name " +
+			"or pa.carrierPhone like :name or pa.transportWay like :name or pa.transportId like :name or pa.note like :name " ;
 	
-	public ImmuneRecordDAOImpl(){
+	public ProductADAOImpl(){
 		Configuration conf = new Configuration().configure();
-		ServiceRegistry service = new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
-		sf = conf.buildSessionFactory(service);
+		ServiceRegistry re = new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
+		sf = conf.buildSessionFactory(re);
 		sess = sf.openSession();
 	}
 
-	public boolean doCreate(ImmuneRecord vo) throws Exception {
+	public boolean doCreate(ProductA vo) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
 		sess.save(vo); //把数据保存到数据库中。
@@ -45,7 +44,7 @@ public class ImmuneRecordDAOImpl implements IImmuneRecordDAO {
 		return true;
 	}
 
-	public boolean doUpdate(ImmuneRecord vo) throws Exception {
+	public boolean doUpdate(ProductA vo) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
 		sess.merge(vo);
@@ -53,40 +52,40 @@ public class ImmuneRecordDAOImpl implements IImmuneRecordDAO {
 		return true;
 	}
 
-	public boolean doDelete(Integer id) throws Exception {
+	public boolean doDelete(String id) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
-		sess.delete(sess.load(ImmuneRecord.class, id));
+		sess.delete(sess.load(ProductA.class, id));
 		tx.commit();
 		return true;
 	}
 
-	public ImmuneRecord findById(Integer id) throws Exception {
+	public ProductA findById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		ImmuneRecord immune = (ImmuneRecord) sess.load(ImmuneRecord.class, id);
-		return immune;
+		ProductA pro = (ProductA) sess.load(ProductA.class, id);
+		return pro;
 	}
 
-	public List<ImmuneRecord> findAll(String keyWord) throws Exception {
+	public List<ProductA> findAll(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		List<ImmuneRecord> list = sess.createQuery(hql).setString("name", "%" + keyWord + "%").list();
+		List<ProductA> list = sess.createQuery(hql).setString("name", "%" + keyWord + "%").list();
 		return list;
 	}
 
-	public List<ImmuneRecord> findAll(String keyWord, int currentPage,
-			int lineSize) throws Exception {
+	public List<ProductA> findAll(String keyWord, int currentPage, int lineSize)
+			throws Exception {
 		// TODO Auto-generated method stub
 		Query query =  sess.createQuery(hql).setString("name", "%" + keyWord + "%");
 		query.setFirstResult((currentPage-1)*lineSize);
 		query.setMaxResults(lineSize);
-		List<ImmuneRecord> list = query.list();
+		List<ProductA> list = query.list();
 		return list;
 	}
 
 	public Integer getAllrecord(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
 		return sess.createQuery(hql).setString("name", "%" + keyWord + "%").list().size();
-	}
+		}
 
 	public void close() {
 		// TODO Auto-generated method stub

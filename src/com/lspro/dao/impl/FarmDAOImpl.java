@@ -14,7 +14,7 @@ import com.lspro.pojo.FarmMes;
 
 /**
  * Desperation:
- * 此操作类实现了IFarmDAO接口，用于增删改查方法的实现<br>
+ * 此操作类实现了IFarmDAO接口，用于养殖场基本信息增删改查方法的实现<br>
  * @author 阿呆
  * @see IFarmDAO
  * @see FarmMes

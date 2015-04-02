@@ -25,6 +25,11 @@
     	<mapping class="com.lspro.pojo.EpidemicMonitoring"/>
     	<mapping class="com.lspro.pojo.MedicalRecord"/>
     	<mapping class="com.lspro.pojo.DisposalHarmless"/>
+    	<mapping class="com.lspro.pojo.Supplies"/>
+    	<mapping class="com.lspro.pojo.AnimalA"/>
+    	<mapping class="com.lspro.pojo.AnimalB"/>
+    	<mapping class="com.lspro.pojo.ProductA"/>
+    	<mapping class="com.lspro.pojo.ProductB"/>
     </session-factory>
 
 </hibernate-configuration>

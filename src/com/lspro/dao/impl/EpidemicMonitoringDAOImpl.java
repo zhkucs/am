@@ -2,7 +2,7 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IEpidemicMonitoringDAO接口，用于生产记录数据表增删改查方法的实现<br>
+ * 此操作类实现了IEpidemicMonitoringDAO接口，用于防疫监测记录基本数据表增删改查方法的实现<br>
  * @author 谢福成
  * @see IEpidemicMonitoringDAO
  * @see EpidemicMonitoring

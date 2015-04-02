@@ -1,29 +1,13 @@
 package com.lspro.factory;
 
-import com.lspro.dao.impl.DisinfectionRecordDAOImpl;
-import com.lspro.dao.impl.DisposalHarmlessDAOImpl;
-import com.lspro.dao.impl.EpidemicMonitoringDAOImpl;
-import com.lspro.dao.impl.FarmDAOImpl;
-import com.lspro.dao.impl.FoodDrugUseRecordDAOImpl;
-import com.lspro.dao.impl.ImmuneRecordDAOImpl;
-import com.lspro.dao.impl.MedicalRecordDAOImpl;
-import com.lspro.dao.impl.ProductRecordDAOImpl;
-import com.lspro.dao.inter.IDisinfectionRecordDAO;
-import com.lspro.dao.inter.IDisposalHarmlessDAO;
-import com.lspro.dao.inter.IEpidemicMonitoringDAO;
-import com.lspro.dao.inter.IFarmDAO;
-import com.lspro.dao.inter.IFoodDrugUseRecordDAO;
-import com.lspro.dao.inter.IImmuneRecordDAO;
-import com.lspro.dao.inter.IMedicalRecordDAO;
-import com.lspro.dao.inter.IProductRecordDAO;
+import com.lspro.dao.impl.*;
+import com.lspro.dao.inter.*;
 
  /**
   * Desperation：
   * 此类为工厂类,用于获取相关模块的具体操作类.<br>
   * @author 阿呆
-  * @see IFarmDAO
-  * @see FarmDAOImpl
-  * @version 2.0(增加另外7个获取具体操作类的方法)
+  * @version 4.0(获取方法增加至13个)
   */
 
 public class DaoFactory {
@@ -61,5 +45,25 @@ public class DaoFactory {
 	
 	public static IDisposalHarmlessDAO getIDisposalHarmlessDaoInstance(){
 		return new DisposalHarmlessDAOImpl();
+	}
+	
+	public static ISuppliesDAO getISuppliesDaoInstance(){
+		return new SuppliesDAOImpl();
+	}
+	
+	public static IAnimalADAO getIAnimalADaoInstance(){
+		return new AnimalADAOImpl();
+	}
+	
+	public static IAnimalBDAO getIAnimalBDaoInstance(){
+		return new AnimalBDAOImpl();
+	}
+	
+	public static IProductADAO getIProductADaoInstance(){
+		return new ProductADAOImpl();
+	}
+	
+	public static IProductBDAO getIProductBDaoInstance(){
+		return new ProductBDAOImpl();
 	}
 }

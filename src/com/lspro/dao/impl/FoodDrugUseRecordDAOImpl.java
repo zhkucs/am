@@ -2,11 +2,11 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IFoodDrugUseRecordDAO接口，用于生产记录数据表增删改查方法的实现<br>
+ * 此操作类实现了IFoodDrugUseRecordDAO接口，用于饲料、饲料添加剂和兽药使用记录表增删改查方法的实现<br>
  * @author 谢福成
  * @see IFoodDrugUseRecordDAO
  * @see FoodDrugUseRecord
- * @version 1.0
+ * @version 2.0(去掉方法中的try...catch块)
  */
 
 import java.util.List;
@@ -38,92 +38,62 @@ public class FoodDrugUseRecordDAOImpl implements IFoodDrugUseRecordDAO {
 
 	public boolean doCreate(FoodDrugUseRecord vo) throws Exception {
 		// TODO Auto-generated method stub 
-		try {
-			tx = sess.beginTransaction();
-			sess.persist(vo);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		tx = sess.beginTransaction();
+		sess.persist(vo);
+		tx.commit();
+		return true;
+
 		
 	}
 
 	public boolean doUpdate(FoodDrugUseRecord vo) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			tx = sess.beginTransaction();
-			sess.merge(vo);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		tx = sess.beginTransaction();
+		sess.merge(vo);
+		tx.commit();
+		return true;
+	
 	}
 
 	public boolean doDelete(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			tx = sess.beginTransaction();
-			sess.delete(sess.load(FoodDrugUseRecord.class, id));
-		 	tx.commit();
-		 	return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		tx = sess.beginTransaction();
+		sess.delete(sess.load(FoodDrugUseRecord.class, id));
+	 	tx.commit();
+	 	return true;
+	
 	}
 
 	public FoodDrugUseRecord findById(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			FoodDrugUseRecord frur = (FoodDrugUseRecord)sess.load(FoodDrugUseRecord.class, id);
-			return frur;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		FoodDrugUseRecord frur = (FoodDrugUseRecord)sess.load(FoodDrugUseRecord.class, id);
+		return frur;
+	
 	}
 
 	public List<FoodDrugUseRecord> findAll(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		try {
+		List<FoodDrugUseRecord> list =  sess.createQuery(sql).setString("name", "%" + keyWord + "%").list() ; //模糊查询
+		return list;
 
-			List<FoodDrugUseRecord> list =  sess.createQuery(sql).setString("name", "%" + keyWord + "%").list() ; //模糊查询
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
 	}
 
 	public List<FoodDrugUseRecord> findAll(String keyWord, int currentPage,
 			int lineSize) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-
-			Query query =  sess.createQuery(sql).setString("name", "%" + keyWord + "%");  //分页查询
-			query.setFirstResult((currentPage - 1 ) * lineSize);
-			query.setMaxResults(lineSize);
-			List<FoodDrugUseRecord> list = query.list();
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		Query query =  sess.createQuery(sql).setString("name", "%" + keyWord + "%");  //分页查询
+		query.setFirstResult((currentPage - 1 ) * lineSize);
+		query.setMaxResults(lineSize);
+		List<FoodDrugUseRecord> list = query.list();
+		return list;
+	
 	}
 
 	public Integer getAllrecord(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		try {
-			int record = sess.createQuery(sql).setString("name", "%" + keyWord + "%").list().size();  //获取数据的数目
-			return record;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+		int record = sess.createQuery(sql).setString("name", "%" + keyWord + "%").list().size();  //获取数据的数目
+		return record;
+	
 	}
 	
 	public void close(){

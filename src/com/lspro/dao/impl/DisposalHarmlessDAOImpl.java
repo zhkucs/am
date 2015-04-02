@@ -2,7 +2,7 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IDisposalHarmlessDAO接口，用于生产记录数据表增删改查方法的实现<br>
+ * 此操作类实现了IDisposalHarmlessDAO接口，用于消毒记录数据表基本信息增删改查方法的实现<br>
  * @author 谢福成
  * @see IDisposalHarmlessDAO
  * @see DisposalHarmless

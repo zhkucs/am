@@ -2,10 +2,10 @@ package com.lspro.dao.impl;
 
 /**
  * Desperation:
- * 此操作类实现了IMedicalRecordDAO接口，用于诊疗记录基本数据表改查方法的实现<br>
+ * 此操作类实现了IAnimalADAO接口，用于动物检疫合格证明表(动物A)增删改查方法的实现<br>
  * @author 谢福成
- * @see IMedicalRecordDAO
- * @see MedicalRecord
+ * @see IAnimalADAO
+ * @see AnimalA
  * @version 1.0
  */
 
@@ -19,26 +19,28 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import com.lspro.dao.inter.IMedicalRecordDAO;
+import com.lspro.dao.inter.IAnimalADAO;
+import com.lspro.pojo.AnimalA;
 import com.lspro.pojo.MedicalRecord;
+ 
 
-public class MedicalRecordDAOImpl implements IMedicalRecordDAO {
-
+public class AnimalADAOImpl implements IAnimalADAO {
+	
 	private Session sess;
 	private SessionFactory sf;
 	private Transaction tx;
-	private String hql ="from MedicalRecord as med where med.medicalTime like :name or med.LivestockId like :name or med.roomNum like :name or " +
-			"med.dateAge like :name or med.sickNum like :name or med.sickReason like :name or med.medicalPeo like :name or med.medicalResult like :name";
+	private String hql ="from AnimalA as aa where aa.id like :name or aa.shipperName like :name or aa.phoneNum like :name or aa.animalSpecies like :name " +
+			"or aa.number like :name or aa.startAddress like :name or aa.destination like :name or aa.use like :name or aa.carrier like :name " +
+			"or aa.carrierPhone like :name or aa.transportWay like :name or aa.transportId like :name or aa.note like :name " ;
 	
-	public MedicalRecordDAOImpl(){
+	public AnimalADAOImpl(){
 		Configuration conf = new Configuration().configure();
-		ServiceRegistry service = new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
-		sf = conf.buildSessionFactory(service);
+		ServiceRegistry registry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
+		sf = conf.buildSessionFactory(registry);
 		sess = sf.openSession();
 	}
-	
-	
-	public boolean doCreate(MedicalRecord vo) throws Exception {
+
+	public boolean doCreate(AnimalA vo) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
 		sess.persist(vo);
@@ -46,7 +48,7 @@ public class MedicalRecordDAOImpl implements IMedicalRecordDAO {
 		return true;
 	}
 
-	public boolean doUpdate(MedicalRecord vo) throws Exception {
+	public boolean doUpdate(AnimalA vo) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
 		sess.merge(vo);
@@ -54,33 +56,33 @@ public class MedicalRecordDAOImpl implements IMedicalRecordDAO {
 		return true;
 	}
 
-	public boolean doDelete(Integer id) throws Exception {
+	public boolean doDelete(String id) throws Exception {
 		// TODO Auto-generated method stub
 		tx = sess.beginTransaction();
-		sess.delete(sess.load(MedicalRecord.class, id));
+		sess.delete(sess.load(AnimalA.class, id));
 		tx.commit();
 		return true;
 	}
 
-	public MedicalRecord findById(Integer id) throws Exception {
+	public AnimalA findById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		MedicalRecord med = (MedicalRecord)sess.load(MedicalRecord.class, id);
-		return med;
+		AnimalA aa = (AnimalA) sess.load(AnimalA.class,id);
+		return aa;
 	}
 
-	public List<MedicalRecord> findAll(String keyWord) throws Exception {
+	public List<AnimalA> findAll(String keyWord) throws Exception {
 		// TODO Auto-generated method stub
-		List<MedicalRecord> list = sess.createQuery(hql).setString("name", "%"+keyWord+"%").list();
+		List<AnimalA> list = sess.createQuery(hql).setString("name", "%"+keyWord+"%").list();
 		return list;
 	}
 
-	public List<MedicalRecord> findAll(String keyWord, int currentPage,
-			int lineSize) throws Exception {
+	public List<AnimalA> findAll(String keyWord, int currentPage, int lineSize)
+			throws Exception {
 		// TODO Auto-generated method stub
 		Query query = sess.createQuery(hql).setString("name", "%"+keyWord+"%");
 		query.setFirstResult((currentPage-1)*lineSize);
 		query.setMaxResults(lineSize);
-		List<MedicalRecord> list = query.list();
+		List<AnimalA> list = query.list();
 		return list;
 	}
 
